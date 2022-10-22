@@ -139,10 +139,10 @@ class Emulator {
     }
 
     getExtRam() {
-        this.withNewFileData((fileDataPtr, buffer) => {
+        return this.withNewFileData((fileDataPtr, buffer) => {
             this.module._emulator_write_ext_ram(this.e, fileDataPtr);
             return new Uint8Array(buffer);
-        })
+        });
     }
 
     requestAnimationFrame() {
