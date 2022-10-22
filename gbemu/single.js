@@ -378,7 +378,21 @@ class Audio {
             this.module, this.module._get_audio_buffer_ptr(e),
             this.module._get_audio_buffer_capacity(e));
         this.startSec = 0;
+        this.resume();
+
+        this.boundStartPlayback = this.startPlayback.bind(this);
+        window.addEventListener('keydown', this.boundStartPlayback, true);
+        window.addEventListener('click', this.boundStartPlayback, true);
+        window.addEventListener('touchend', this.boundStartPlayback, true);
     }
+    
+    startPlayback() {
+        window.removeEventListener('touchend', this.boundStartPlayback, true);
+        window.removeEventListener('keydown', this.boundStartPlayback, true);
+        window.removeEventListener('click', this.boundStartPlayback, true);
+        this.started = true;
+        this.resume();
+      }
 
     get sampleRate() { return Audio.ctx.sampleRate; }
 
@@ -408,6 +422,16 @@ class Audio {
                 nowSec.toFixed(2) + ')');
             this.startSec = nowPlusLatency;
         }
+    }
+
+    pause() {
+        if (!this.started) { return; }
+        Audio.ctx.suspend();
+    }
+    
+    resume() {
+        if (!this.started) { return; }
+        Audio.ctx.resume();
     }
 }
 
