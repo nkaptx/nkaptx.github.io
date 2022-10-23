@@ -6,7 +6,7 @@ const ENABLE_PAUSE = false;
 const OSGP_DEADZONE = 0.1;
 
 // audio config
-const AUDIO_FRAMES = 4096;
+const AUDIO_FRAMES = 1500;
 const AUDIO_LATENCY_SEC = 0.1;
 const MAX_UPDATE_SEC = 5 / 60;
 
@@ -413,8 +413,7 @@ class Audio {
             const bufferSource = Audio.ctx.createBufferSource();
             bufferSource.buffer = buffer;
             bufferSource.connect(Audio.ctx.destination);
-			//bufferSource.noteOn(0); 
-            bufferSource.start(this.startSec - 0.02);
+            bufferSource.start(this.startSec);
             const bufferSec = AUDIO_FRAMES / this.sampleRate;
             this.startSec += bufferSec;
         } else {
