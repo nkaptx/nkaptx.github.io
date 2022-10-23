@@ -37,7 +37,7 @@ class VM {
         this.ticks = 0;
         this.extRamUpdated = false;
         this.paused = false;
-        this.volume = 0.5;
+        this.volume = 1;
         setInterval(() => {
             if (this.extRamUpdated) {
                 this.updateExtRam();
@@ -413,7 +413,8 @@ class Audio {
             const bufferSource = Audio.ctx.createBufferSource();
             bufferSource.buffer = buffer;
             bufferSource.connect(Audio.ctx.destination);
-            bufferSource.start(this.startSec);
+			//bufferSource.noteOn(0); 
+            bufferSource.start(this.startSec - 0.02);
             const bufferSec = AUDIO_FRAMES / this.sampleRate;
             this.startSec += bufferSec;
         } else {
