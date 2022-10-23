@@ -1,7 +1,7 @@
 "use strict";
 
 // user config
-const ROM_FILENAME = 'zelda.gb';
+const ROM_FILENAME = 'PM.gb';
 const ENABLE_PAUSE = false;
 const OSGP_DEADZONE = 0.1;
 
